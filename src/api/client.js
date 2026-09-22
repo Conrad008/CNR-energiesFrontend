@@ -11,3 +11,8 @@ export const tokens = {
   },
   clear() { localStorage.removeItem('access'); localStorage.removeItem('refresh') },
 }
+
+api.interceptors.request.use((config) => {
+  if (tokens.access) config.headers.Authorization = `Bearer ${tokens.access}`
+  return config
+})
