@@ -26,3 +26,10 @@ function NavLinks({ onNavigate }) {
     </nav>
   )
 }
+
+export default function AppShell() {
+  const [open, setOpen] = useState(false)
+  const { user, logout } = useAuth()
+  const { dark, toggle } = useTheme()
+
+}
