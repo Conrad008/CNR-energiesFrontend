@@ -32,4 +32,25 @@ export default function AppShell() {
   const { user, logout } = useAuth()
   const { dark, toggle } = useTheme()
 
+    return (
+        <div className="min-h-screen bg-app text-ink">
+            <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-line bg-surface md:block">
+                <div className="px-6 py-5 text-lg font-bold text-primary">CNR Energies</div>
+                <NavLinks />
+            </aside>
+
+            {open && (
+                <div className="fixed inset-0 z-40 md:hidden">
+                    <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
+                    <aside className="relative h-full w-64 border-r border-line bg-surface">
+                        <div className="flex items-center justify-between px-6 py-5">
+                            <span className="text-lg font-bold text-primary">CNR Energies</span>
+                            <button onClick={() => setOpen(false)} aria-label="Close menu"><X size={20} /></button>
+                        </div>
+                        <NavLinks onNavigate={() => setOpen(false)} />
+                    </aside>
+                </div>
+            )}
+        </div>
+    )
 }
