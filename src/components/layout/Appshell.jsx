@@ -51,6 +51,28 @@ export default function AppShell() {
                     </aside>
                 </div>
             )}
+
+            <div className="md:pl-64">
+                <header className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-surface px-4 py-3">
+                    <button className="md:hidden" onClick={() => setOpen(true)} aria-label="Open menu">
+                        <Menu size={22} />
+                    </button>
+                    <div className="hidden text-sm text-muted md:block">
+                        {user?.first_name} {user?.last_name} · {user?.role}
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <button onClick={toggle} className="rounded-lg p-2 hover:bg-line/50" aria-label="Toggle theme">
+                            {dark ? <Sun size={18} /> : <Moon size={18} />}
+                        </button>
+                        <button onClick={logout} className="rounded-lg p-2 hover:bg-line/50" aria-label="Log out">
+                            <LogOut size={18} />
+                        </button>
+                    </div>
+                </header>
+                <main className="mx-auto max-w-6xl p-4 md:p-6">
+                    <Outlet />
+                </main>
+            </div>
         </div>
     )
 }
