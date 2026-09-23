@@ -21,6 +21,19 @@ export default function ShiftList({ shifts }) {
                         <th className="py-2 font-medium">Opening float</th>
                     </tr>
                 </thead>
+
+                <tbody>
+                    {shifts.map((s) => (
+                        <tr key={s.id} className="border-b border-line last:border-0">
+                            <td className="py-2">
+                                <Link to={`/shifts/${s.id}`} className="font-medium text-primary hover:underline">{s.attendant_email}</Link>
+                            </td>
+                            <td className="py-2"><Badge variant={statusVariant[s.status] || 'muted'}>{s.status}</Badge></td>
+                            <td className="py-2 text-muted">{formatDateTime(s.start_time)}</td>
+                            <td className="py-2 tabular-nums">{s.opening_cash_float}</td>
+                        </tr>
+                    ))}
+                </tbody>
           </table>
 
     </>
