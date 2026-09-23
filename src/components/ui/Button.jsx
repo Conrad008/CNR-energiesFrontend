@@ -4,4 +4,10 @@ export default function Button({ variant = 'primary', className = '', children, 
         primary: 'bg-primary text-on-primary hover:opacity-90',
         outline: 'border border-line text-ink hover:bg-line/30',
     }
+
+    return (
+        <button className={`${base} ${variants[variant]} ${className}`} {...props}>
+            {children}
+        </button>
+    )
 }
