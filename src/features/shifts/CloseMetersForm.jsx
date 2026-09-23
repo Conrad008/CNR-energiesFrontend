@@ -5,3 +5,13 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import { closeMeters } from '@/api/shifts'
+
+export default function CloseMetersForm({ shift }) {
+  const navigate = useNavigate()
+  const [values, setValues] = useState(
+    Object.fromEntries(shift.pump_readings.map((r) => [r.nozzle, r.opening_meter]))
+  )
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+}
