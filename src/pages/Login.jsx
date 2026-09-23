@@ -11,4 +11,17 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+
+    if (user) return <Navigate to="/" replace />
+
+    async function onSubmit(e) {
+        e.preventDefault()
+        setBusy(true); setError('')
+        try {
+            await login(email, password)
+            navigate(location.state?.from?.pathname || '/', { replace: true })
+        } catch (err) {
+            setError(err.response?.data?.detail || 'Could not sign in. Check your details.')
+        } finally { setBusy(false) }
+    }
 }
