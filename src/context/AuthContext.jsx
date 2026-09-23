@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
-import api, { tokens } from '../api/client'
+import { tokens } from '../api/client'
+import * as authApi from '../api/auth'
 
 const AuthContext = createContext(null)
 export const useAuth = () => useContext(AuthContext)
@@ -10,15 +11,14 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         if (!tokens.access) return
-        api.get('/users/me/')
+        authApi.me()
             .then((r) => setUser(r.data))
             .catch(() => tokens.clear())
             .finally(() => setLoading(false))
-
     }, [])
 
     const login = useCallback(async (email, password) => {
-        const { data } = await api.post('/auth/login/', { email, password })
+        const { data } = await authApi.login(email, password)
         tokens.set(data)
         setUser(data.user)
     }, [])
@@ -31,4 +31,3 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     )
 }
-
