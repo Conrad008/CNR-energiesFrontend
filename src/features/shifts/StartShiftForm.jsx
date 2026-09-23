@@ -15,4 +15,22 @@ export default function StartShiftForm() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
+    useEffect(() => {
+        listStations().then((r) => {
+            setStations(r.data)
+            if (r.data.length === 1) setStationId(r.data[0].id)
+        })
+    }, [])
+
+    async function onSubmit(e) {
+        e.preventDefault()
+        setBusy(true); setError('')
+        try {
+            const { data } = await startShift(stationId, openingFloat)
+            navigate(`/shifts/${data.id}`)
+        } catch (err) {
+            setError(err.response?.data?.error || 'Could not start shift.')
+        } finally { setBusy(false) }
+    }
+
 }
