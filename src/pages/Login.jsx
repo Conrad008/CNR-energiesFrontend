@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { Fuel, Loader2 } from 'lucide-react'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '@/auth/AuthContext'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Card from '@/components/ui/Card'
 
 export default function Login() {
     const { user, login } = useAuth()
@@ -25,26 +28,26 @@ export default function Login() {
         } finally { setBusy(false) }
     }
 
-    const field = 'w-full rounded-lg border border-line bg-app px-3 py-2 text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/30'
-
     return (
         <div className="flex min-h-screen items-center justify-center bg-app p-4">
-            <form onSubmit={onSubmit} className="w-full max-w-sm space-y-4 rounded-2xl border border-line bg-surface p-6 shadow-sm">
-                <div className="flex items-center gap-2 text-primary">
+            <Card className="w-full max-w-sm">
+                <div className="mb-4 flex items-center gap-2 text-primary">
                     <Fuel /> <span className="text-xl font-bold">CNR Energies</span>
                 </div>
-                <p className="text-sm text-muted">Sign in to manage your station.</p>
-                {error && <div className="rounded-lg border border-danger/40 p-3 text-sm text-danger">{error}</div>}
-                <label className="block text-sm">Email
-                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className={`${field} mt-1`} />
-                </label>
-                <label className="block text-sm">Password
-                    <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className={`${field} mt-1`} />
-                </label>
-                <button disabled={busy} className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2 font-medium text-on-primary disabled:opacity-60">
-                    {busy && <Loader2 size={16} className="animate-spin" />} Sign in
-                </button>
-            </form>
+                <form onSubmit={onSubmit} className="space-y-4">
+                    <p className="text-sm text-muted">Sign in to manage your station.</p>
+                    {error && <div className="rounded-lg border border-danger/40 p-3 text-sm text-danger">{error}</div>}
+                    <label className="block text-sm">Email
+                        <Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1" />
+                    </label>
+                    <label className="block text-sm">Password
+                        <Input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1" />
+                    </label>
+                    <Button type="submit" disabled={busy} className="w-full">
+                        {busy && <Loader2 size={16} className="animate-spin" />} Sign in
+                    </Button>
+                </form>
+            </Card>
         </div>
     )
 }
