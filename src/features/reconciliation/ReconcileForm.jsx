@@ -69,6 +69,9 @@ export default function ReconcileForm({ shift }) {
           </div>
         </div>
 
+        <Button type="submit" disabled={busy} className="w-full sm:w-auto">
+          {busy && <Loader2 size={16} className="animate-spin" />} Submit reconciliation
+        </Button>
         
       </form>
     </Card>
