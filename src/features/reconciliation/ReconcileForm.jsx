@@ -7,3 +7,13 @@ import Card from '@/components/ui/Card'
 import { formatKsh } from '@/lib/format'
 import { reconcileShift } from '@/api/reconciliation'
 
+export default function ReconcileForm({ shift }) {
+  const navigate = useNavigate()
+  const [cash, setCash] = useState('0.00')
+  const [mpesa, setMpesa] = useState('0.00')
+  const [card, setCard] = useState('0.00')
+  const [credit, setCredit] = useState('0.00')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+}
