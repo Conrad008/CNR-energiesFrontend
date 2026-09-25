@@ -37,4 +37,29 @@ export default function ReconcileForm({ shift }) {
         } finally { setBusy(false) }
     }
 
+      return (
+    <Card>
+      <form onSubmit={onSubmit} className="space-y-4">
+        <h2 className="font-semibold">Reconcile shift</h2>
+        {error && <div className="rounded-lg border border-danger/40 p-3 text-sm text-danger">{error}</div>}
+
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <label className="block text-sm">Cash
+            <Input type="number" min="0" step="0.01" value={cash} onChange={(e) => setCash(e.target.value)} className="mt-1 tabular-nums" />
+          </label>
+          <label className="block text-sm">M-Pesa
+            <Input type="number" min="0" step="0.01" value={mpesa} onChange={(e) => setMpesa(e.target.value)} className="mt-1 tabular-nums" />
+          </label>
+          <label className="block text-sm">Card
+            <Input type="number" min="0" step="0.01" value={card} onChange={(e) => setCard(e.target.value)} className="mt-1 tabular-nums" />
+          </label>
+          <label className="block text-sm">Credit
+            <Input type="number" min="0" step="0.01" value={credit} onChange={(e) => setCredit(e.target.value)} className="mt-1 tabular-nums" />
+          </label>
+        </div>
+
+        
+      </form>
+    </Card>
+  )
 }
