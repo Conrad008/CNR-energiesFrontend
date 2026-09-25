@@ -8,12 +8,19 @@ import { formatKsh } from '@/lib/format'
 import { reconcileShift } from '@/api/reconciliation'
 
 export default function ReconcileForm({ shift }) {
-  const navigate = useNavigate()
-  const [cash, setCash] = useState('0.00')
-  const [mpesa, setMpesa] = useState('0.00')
-  const [card, setCard] = useState('0.00')
-  const [credit, setCredit] = useState('0.00')
-  const [error, setError] = useState('')
-  const [busy, setBusy] = useState(false)
+    const navigate = useNavigate()
+    const [cash, setCash] = useState('0.00')
+    const [mpesa, setMpesa] = useState('0.00')
+    const [card, setCard] = useState('0.00')
+    const [credit, setCredit] = useState('0.00')
+    const [error, setError] = useState('')
+    const [busy, setBusy] = useState(false)
 
+    const expected = useMemo(
+        () => shift.pump_readings.reduce((sum, r) => sum + Number(r.expected_revenue || 0), 0),
+        [shift.pump_readings]
+    )
+    const actualTotal = [cash, mpesa, card, credit].reduce((s, v) => s + (Number(v) || 0), 0)
+    const variance = actualTotal - expected
+    const isShort = variance < 0
 }
