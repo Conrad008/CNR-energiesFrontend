@@ -25,4 +25,28 @@ export default function CloseMetersForm({ shift }) {
             setError(err.response?.data?.error || 'Could not save closing meters.')
         } finally { setBusy(false) }
     }
+
+    return (
+        <Card>
+            <form onSubmit={onSubmit} className="space-y-4">
+                <h2 className="font-semibold">Closing meters</h2>
+                {error && <div className="rounded-lg border border-danger/40 p-3 text-sm text-danger">{error}</div>}
+                <div className="space-y-3">
+                    {shift.pump_readings.map((r) => (
+                        <div key={r.id} className="flex items-center justify-between gap-3">
+                            <span className="text-sm">{r.nozzle_name} <span className="text-muted">({r.product_name})</span></span>
+                            <Input
+                                type="number" step="0.01" min={r.opening_meter} className="w-32 tabular-nums"
+                                value={values[r.nozzle]}
+                                onChange={(e) => setValues((v) => ({ ...v, [r.nozzle]: e.target.value }))}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <Button type="submit" disabled={busy} className="w-full sm:w-auto">
+                    {busy && <Loader2 size={16} className="animate-spin" />} Submit closing meters
+                </Button>
+            </form>
+        </Card>
+    )
 }
