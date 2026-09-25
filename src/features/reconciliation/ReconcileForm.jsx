@@ -58,6 +58,17 @@ export default function ReconcileForm({ shift }) {
           </label>
         </div>
 
+        <div className="grid grid-cols-3 gap-4 rounded-lg border border-line bg-app p-3 text-sm">
+          <div><div className="text-muted">Expected</div><div className="tabular-nums font-medium">{formatKsh(expected)}</div></div>
+          <div><div className="text-muted">Actual total</div><div className="tabular-nums font-medium">{formatKsh(actualTotal)}</div></div>
+          <div>
+            <div className="text-muted">Variance</div>
+            <div className={`tabular-nums font-medium ${isShort ? 'text-danger' : 'text-primary'}`}>
+              {isShort ? '' : '+'}{formatKsh(variance)}
+            </div>
+          </div>
+        </div>
+
         
       </form>
     </Card>
