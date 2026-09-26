@@ -25,5 +25,24 @@ export default function PaymentForm({ customer, onDone }) {
         } finally { setBusy(false) }
     }
 
-    
+    return (
+        <form onSubmit={onSubmit} className="space-y-3 rounded-lg border border-line p-3">
+            <h3 className="text-sm font-semibold">Record payment</h3>
+            {error && <div className="rounded-lg border border-danger/40 p-2 text-xs text-danger">{error}</div>}
+            <label className="block text-sm">Amount (KSh)
+                <Input type="number" min="0.01" step="0.01" max={customer.current_balance} required value={amount} onChange={(e) => setAmount(e.target.value)} className="mt-1 tabular-nums" />
+            </label>
+            <label className="block text-sm">Method
+                <select value={method} onChange={(e) => setMethod(e.target.value)} className="mt-1 w-full rounded-lg border border-line bg-app px-3 py-2 text-sm text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/30">
+                    {METHODS.map((m) => <option key={m} value={m}>{m.replace('_', ' ')}</option>)}
+                </select>
+            </label>
+            <label className="block text-sm">Reference (optional)
+                <Input value={reference} onChange={(e) => setReference(e.target.value)} className="mt-1" />
+            </label>
+            <Button type="submit" disabled={busy} className="w-full sm:w-auto">
+                {busy && <Loader2 size={16} className="animate-spin" />} Record payment
+            </Button>
+        </form>
+    )
 }
