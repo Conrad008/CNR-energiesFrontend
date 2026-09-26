@@ -6,6 +6,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Shifts from './pages/Shifts'
 import ShiftDetailPage from './pages/ShiftDetailPage'
+import CreditCustomers from './pages/CreditCustomers'
+import CreditCustomerDetail from './pages/CreditCustomerDetail'
 
 const queryClient = new QueryClient()
 
@@ -20,6 +22,8 @@ export default function App() {
                   <Route index element={<Dashboard />} />
                   <Route path="/shifts" element={<Shifts />} />
                   <Route path="/shifts/:id" element={<ShiftDetailPage />} />
+                  <Route path="/credit" element={<CreditCustomers />} />
+                  <Route path="/credit/:id" element={<CreditCustomerDetail />} />
                 </Route>
               </Route>
             </Routes>
