@@ -1,0 +1,7 @@
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { getCustomer } from '@/api/credit'
+import { formatKsh } from '@/lib/format'
+import CreditSaleForm from '@/features/credit/CreditSaleForm'
+import PaymentForm from '@/features/credit/PaymentForm'
+import Card from '@/components/ui/Card'
