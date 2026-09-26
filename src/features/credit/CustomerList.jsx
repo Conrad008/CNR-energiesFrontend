@@ -33,6 +33,20 @@ export default function CustomerList({ customers }) {
                 ))}
             </tbody>
         </table>
+        
+        <div className="space-y-3 md:hidden">
+            {customers.map((c) => (
+                <Link key={c.id} to={`/credit/${c.id}`} className="block rounded-xl border border-line bg-surface p-4">
+                    <div className="flex items-center justify-between">
+                        <span className="font-medium">{c.name}</span>
+                        <Badge variant={c.is_active ? 'default' : 'muted'}>{c.is_active ? 'Active' : 'Inactive'}</Badge>
+                    </div>
+                    
+                    <div className="mt-1 text-sm tabular-nums">Balance: {formatKsh(c.current_balance)}</div>
+                    <div className="text-sm tabular-nums text-muted">Available: {formatKsh(c.available_credit)}</div>
+                </Link>
+            ))}
+        </div>
     </>
     )
 }
