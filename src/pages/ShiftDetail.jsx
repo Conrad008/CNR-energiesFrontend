@@ -5,7 +5,7 @@ import CloseMetersForm from '@/features/shifts/CloseMetersForm'
 import ReconcileForm from '@/features/reconciliation/ReconcileForm'
 import { formatDateTime, formatKsh } from '@/lib/format'
 import Badge from '@/components/ui/Badge'
-import { useAuth } from '@/auth/AuthContext'
+import { useAuth } from '@/context/AuthContext'
 import { ROLE } from '@/lib/roles'
 
 export default function ShiftDetailPage() {
