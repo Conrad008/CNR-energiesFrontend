@@ -6,6 +6,8 @@ import Input from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import { formatKsh } from '@/lib/format'
 import { reconcileShift } from '@/api/reconciliation'
+import { useState } from 'react'
+import StkPushModal from '@/features/mpesa/StkPushModal'
 
 export default function ReconcileForm({ shift }) {
     const navigate = useNavigate()
@@ -15,6 +17,7 @@ export default function ReconcileForm({ shift }) {
     const [credit, setCredit] = useState('0.00')
     const [error, setError] = useState('')
     const [busy, setBusy] = useState(false)
+    const [showStk, setShowStk] = useState(false)
 
     const expected = useMemo(
         () => shift.pump_readings.reduce((sum, r) => sum + Number(r.expected_revenue || 0), 0),
@@ -47,8 +50,12 @@ export default function ReconcileForm({ shift }) {
           <label className="block text-sm">Cash
             <Input type="number" min="0" step="0.01" value={cash} onChange={(e) => setCash(e.target.value)} className="mt-1 tabular-nums" />
           </label>
+          
           <label className="block text-sm">M-Pesa
-            <Input type="number" min="0" step="0.01" value={mpesa} onChange={(e) => setMpesa(e.target.value)} className="mt-1 tabular-nums" />
+            <div className="mt-1 flex gap-2">
+                <Input type="number" min="0" step="0.01" value={mpesa} onChange={(e) => setMpesa(e.target.value)} className="tabular-nums" />
+                <Button type="button" variant="outline" onClick={() => setShowStk(true)}>Push</Button>
+            </div>
           </label>
           <label className="block text-sm">Card
             <Input type="number" min="0" step="0.01" value={card} onChange={(e) => setCard(e.target.value)} className="mt-1 tabular-nums" />
@@ -72,8 +79,17 @@ export default function ReconcileForm({ shift }) {
         <Button type="submit" disabled={busy} className="w-full sm:w-auto">
           {busy && <Loader2 size={16} className="animate-spin" />} Submit reconciliation
         </Button>
-        
+
       </form>
+      
+      {showStk && (
+        <StkPushModal
+        amount={mpesa || '0'}
+        shiftId={shift.id}
+        onClose={() => setShowStk(false)}
+        onSuccess={(txn) => { setMpesa(String(txn.amount)); setShowStk(false) }}
+        />
+      )}
     </Card>
   )
 }
