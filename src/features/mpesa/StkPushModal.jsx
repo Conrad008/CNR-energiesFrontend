@@ -76,4 +76,10 @@ export default function StkPushModal({ amount, shiftId, creditCustomerId, onClos
         }
     }
 
+    function retry() {
+        clearTimeout(pollTimer.current)
+        setError('')
+        setPhase(PHASE.ENTER)
+    }
+    
 }
