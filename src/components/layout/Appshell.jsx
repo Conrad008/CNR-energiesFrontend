@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { Menu, X, Sun, Moon, LogOut, LayoutDashboard, Fuel } from 'lucide-react'
+import { Menu, X, Sun, Moon, LogOut, LayoutDashboard, Fuel , Users } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { useTheme } from '@/context/ThemeContext'
 
 const NAV = [
-    { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/shifts', label: 'Shifts', icon: Fuel },
+  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/shifts', label: 'Shifts', icon: Fuel },
+  { to: '/credit', label: 'Credit customers', icon: Users },
 ]
 
 function NavLinks({ onNavigate }) {
