@@ -10,4 +10,16 @@ export default function DipReadingForm({ tank, onDone }) {
     const [error, setError] = useState('')
     const [busy, setBusy] = useState(false)
 
+    async function onSubmit(e) {
+        e.preventDefault()
+        setBusy(true); setError('')
+        try {
+            await recordDip(tank.id, { dip_level_cm: dipCm, dip_liters: liters })
+            setDipCm(''); setLiters('')
+            onDone()
+        } catch (err) {
+            setError(err.response?.data?.error || 'Could not record dip reading.')
+        } finally { setBusy(false) }
+    }
+
 }
