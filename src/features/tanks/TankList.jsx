@@ -15,7 +15,18 @@ export default function TankList({ tanks, onSelect }) {
                 <button
                     key={t.id} onClick={() => onSelect(t)}
                     className="rounded-xl border border-line bg-surface p-4 text-left hover:border-primary"
-                ></button>
+                >
+                    <div className="flex items-center justify-between">
+                        <span className="font-medium">{t.name}</span>
+                        <span className="text-xs text-muted">{t.product_name}</span>
+                    </div>
+                    <div className="mt-3 h-2 w-full rounded-full bg-line">
+                        <div
+                            className={`h-2 rounded-full ${low ? 'bg-danger' : 'bg-primary'}`}
+                            style={{ width: `${pct}%` }}
+                        />
+                    </div>   
+                </button>
             )
         })}
     </div>
