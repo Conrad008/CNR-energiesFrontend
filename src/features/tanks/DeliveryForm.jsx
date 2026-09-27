@@ -13,4 +13,19 @@ export default function DeliveryForm({ tanks, onDone }) {
     const [error, setError] = useState('')
     const [busy, setBusy] = useState(false)
 
+    async function onSubmit(e) {
+        e.preventDefault()
+        setBusy(true); setError('')
+        try {
+            await recordDelivery({
+                tank: tankId, supplier_name: supplier, invoice_number: invoice,
+                quantity_liters: quantity, unit_cost: unitCost,
+            })
+            setSupplier(''); setInvoice(''); setQuantity(''); setUnitCost('')
+            onDone()
+        } catch (err) {
+            setError(err.response?.data?.error || 'Could not record delivery.')
+        } finally { setBusy(false) }
+    }
+
 }
