@@ -25,7 +25,12 @@ export default function TankList({ tanks, onSelect }) {
                             className={`h-2 rounded-full ${low ? 'bg-danger' : 'bg-primary'}`}
                             style={{ width: `${pct}%` }}
                         />
-                    </div>   
+                    </div>
+
+                    <div className="mt-2 flex items-center justify-between text-sm">
+                        <span className="tabular-nums text-muted">{formatLiters(t.current_capacity_liters)} / {formatLiters(t.capacity_liters)}</span>
+                        <span className={`tabular-nums font-medium ${low ? 'text-danger' : 'text-ink'}`}>{pct}%</span>
+                    </div>
                 </button>
             )
         })}
