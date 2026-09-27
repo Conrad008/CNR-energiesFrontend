@@ -11,7 +11,12 @@ export default function TankList({ tanks, onSelect }) {
             ? Math.min(100, Math.round((t.current_capacity_liters / t.capacity_liters) * 100))
             : 0
             const low = pct < 20
-            
+            return (
+                <button
+                    key={t.id} onClick={() => onSelect(t)}
+                    className="rounded-xl border border-line bg-surface p-4 text-left hover:border-primary"
+                ></button>
+            )
         })}
     </div>
     
