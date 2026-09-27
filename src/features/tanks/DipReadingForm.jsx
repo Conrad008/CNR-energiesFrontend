@@ -22,4 +22,19 @@ export default function DipReadingForm({ tank, onDone }) {
         } finally { setBusy(false) }
     }
 
+    return (
+        <form onSubmit={onSubmit} className="space-y-3 rounded-lg border border-line p-3">
+            <h3 className="text-sm font-semibold">Record dip reading — {tank.name}</h3>
+            {error && <div className="rounded-lg border border-danger/40 p-2 text-xs text-danger">{error}</div>}
+            <label className="block text-sm">Dip depth (cm)
+                <Input type="number" min="0" step="0.1" value={dipCm} onChange={(e) => setDipCm(e.target.value)} className="mt-1 tabular-nums" />
+            </label>
+            <label className="block text-sm">Physical volume (liters)
+                <Input type="number" min="0" step="0.01" required value={liters} onChange={(e) => setLiters(e.target.value)} className="mt-1 tabular-nums" />
+            </label>
+            <Button type="submit" disabled={busy} className="w-full sm:w-auto">
+                {busy && <Loader2 size={16} className="animate-spin" />} Submit dip reading
+            </Button>
+        </form>
+    )
 }
