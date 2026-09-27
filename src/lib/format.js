@@ -3,3 +3,6 @@ export const formatKsh = (n) =>
 
 export const formatDateTime = (iso) =>
   iso ? new Date(iso).toLocaleString('en-KE', { dateStyle: 'medium', timeStyle: 'short' }) : '—'
+
+export const formatLiters = (n) =>
+  `${new Intl.NumberFormat('en-KE', { maximumFractionDigits: 0 }).format(Number(n) || 0)} L`
