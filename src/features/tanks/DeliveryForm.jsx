@@ -4,3 +4,13 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import { recordDelivery } from '@/api/deliveries'
 
+export default function DeliveryForm({ tanks, onDone }) {
+    const [tankId, setTankId] = useState(tanks[0]?.id || '')
+    const [supplier, setSupplier] = useState('')
+    const [invoice, setInvoice] = useState('')
+    const [quantity, setQuantity] = useState('')
+    const [unitCost, setUnitCost] = useState('')
+    const [error, setError] = useState('')
+    const [busy, setBusy] = useState(false)
+
+}
