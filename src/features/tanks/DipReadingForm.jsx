@@ -14,7 +14,7 @@ export default function DipReadingForm({ tank, onDone }) {
         e.preventDefault()
         setBusy(true); setError('')
         try {
-            await recordDip(tank.id, { dip_level_cm: dipCm, dip_liters: liters })
+            await recordDip(tank.id, { dip_depth_cm: dipCm, physical_liters: liters })
             setDipCm(''); setLiters('')
             onDone()
         } catch (err) {
