@@ -11,4 +11,22 @@ export default function DashboardCharts({ data }) {
     { name: 'B2B Credit', value: Number(data.payment_channel_breakdown.b2b_credit) },
   ].filter((c) => c.value > 0)
 
+    return (
+    <div className="grid gap-4 lg:grid-cols-2">
+      <div className="rounded-xl border border-line bg-surface p-4">
+        <h3 className="mb-3 text-sm font-semibold text-muted">Payment channels</h3>
+        {channels.length ? (
+          <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+              <Pie data={channels} dataKey="value" nameKey="name" outerRadius={80} label={(e) => e.name}>
+                {channels.map((_, i) => <Cell key={i} fill={CHANNEL_COLORS[i % CHANNEL_COLORS.length]} />)}
+              </Pie>
+              <Tooltip formatter={(v) => formatKsh(v)} />
+            </PieChart>
+          </ResponsiveContainer>
+        ) : (
+          <p className="py-16 text-center text-sm text-muted">No revenue recorded in this period.</p>
+        )}
+      </div>
+    </div>)
 }
