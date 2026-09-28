@@ -14,4 +14,8 @@ export function useFetch(fetcher, deps = []) {
     
     }, deps)
 
+      useEffect(() => { load() }, [load])
+      
+      return { data, loading, error, refresh: load }
+
 }
