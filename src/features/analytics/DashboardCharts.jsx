@@ -28,5 +28,25 @@ export default function DashboardCharts({ data }) {
           <p className="py-16 text-center text-sm text-muted">No revenue recorded in this period.</p>
         )}
       </div>
-    </div>)
+      
+      <div className="rounded-xl border border-line bg-surface p-4">
+        <h3 className="mb-3 text-sm font-semibold text-muted">Expected vs. collected</h3>
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart
+            data={[{
+              name: 'Revenue',
+              Expected: Number(data.revenue_summary.total_expected_revenue),
+              Collected: Number(data.revenue_summary.total_actual_collected),
+            }]}
+          >
+            <XAxis dataKey="name" stroke="var(--muted)" fontSize={12} />
+            <YAxis stroke="var(--muted)" fontSize={12} />
+            <Tooltip formatter={(v) => formatKsh(v)} />
+            <Bar dataKey="Expected" fill="#93a59b" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="Collected" fill="#15803d" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+    )
 }
