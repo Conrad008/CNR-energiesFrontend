@@ -20,4 +20,14 @@ export default function PriceUpdateForm({ product, onDone }) {
         } finally { setBusy(false) }
     }
 
+    return (
+        <form onSubmit={onSubmit} className="flex items-end gap-2">
+            <label className="block text-sm">New price (KSh/L)
+                <Input type="number" min="0.01" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className="mt-1 w-32 tabular-nums" />
+            </label>
+            <Button type="submit" disabled={busy}>{busy && <Loader2 size={16} className="animate-spin" />} Update</Button>
+            {error && <span className="text-xs text-danger">{error}</span>}
+        </form>
+    )
+
 }
