@@ -12,5 +12,15 @@ export default function UserForm({ onDone }) {
 
     const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
-    
+    async function onSubmit(e) {
+        e.preventDefault()
+        setBusy(true); setError('')
+        try {
+            await createUser(form)
+            onDone()
+        } catch (err) {
+            const data = err.response?.data
+            setError(typeof data === 'object' ? Object.values(data).flat().join(' ') : 'Could not create user.')
+        } finally { setBusy(false) }
+    }
 }
