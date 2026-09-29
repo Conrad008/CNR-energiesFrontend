@@ -1,20 +1,28 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { Menu, X, Sun, Moon, LogOut, LayoutDashboard, Fuel , Users, Droplet } from 'lucide-react'
-import { useAuth } from '@/context/AuthContext'
-import { useTheme } from '@/context/ThemeContext'
+import {
+    Menu, X, Sun, Moon, LogOut,
+    LayoutDashboard, Fuel, Users as UsersIcon, Droplet, FileText, ShieldCheck
+} from 'lucide-react'
+import { useAuth } from '@/auth/AuthContext'
+import { useTheme } from '@/theme/ThemeContext'
+import { ROLE } from '@/lib/roles'
 
-const NAV = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/shifts', label: 'Shifts', icon: Fuel },
-  { to: '/credit', label: 'Credit customers', icon: Users },
-  { to: '/tanks', label: 'Tanks', icon: Droplet },
+const ALL_NAV = [
+    { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true, roles: null },
+    { to: '/shifts', label: 'Shifts', icon: Fuel, roles: null },
+    { to: '/credit', label: 'Credit customers', icon: UsersIcon, roles: null },
+    { to: '/tanks', label: 'Tanks', icon: Droplet, roles: null },
+    { to: '/fuel-products', label: 'Fuel products', icon: FileText, roles: null },
+    { to: '/users', label: 'Users', icon: ShieldCheck, roles: [ROLE.SUPER_ADMIN] },
+    { to: '/audit-logs', label: 'Audit log', icon: FileText, roles: [ROLE.SUPER_ADMIN] },
 ]
 
-function NavLinks({ onNavigate }) {
+function NavLinks({ onNavigate, user }) {
+    const nav = ALL_NAV.filter((n) => !n.roles || n.roles.includes(user?.role))
     return (
         <nav className="flex flex-col gap-1 p-3">
-            {NAV.map(({ to, label, icon: Icon, end }) => (
+            {nav.map(({ to, label, icon: Icon, end }) => (
                 <NavLink
                     key={to} to={to} end={end} onClick={onNavigate}
                     className={({ isActive }) =>
@@ -37,7 +45,7 @@ export default function AppShell() {
         <div className="min-h-screen bg-app text-ink">
             <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-line bg-surface md:block">
                 <div className="px-6 py-5 text-lg font-bold text-primary">CNR Energies</div>
-                <NavLinks />
+                <NavLinks user={user} />
             </aside>
 
             {open && (
@@ -48,7 +56,7 @@ export default function AppShell() {
                             <span className="text-lg font-bold text-primary">CNR Energies</span>
                             <button onClick={() => setOpen(false)} aria-label="Close menu"><X size={20} /></button>
                         </div>
-                        <NavLinks onNavigate={() => setOpen(false)} />
+                        <NavLinks onNavigate={() => setOpen(false)} user={user} />
                     </aside>
                 </div>
             )}
