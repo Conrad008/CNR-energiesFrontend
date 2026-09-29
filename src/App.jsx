@@ -9,7 +9,9 @@ import ShiftDetailPage from './pages/ShiftDetailPage'
 import CreditCustomers from './pages/CreditCustomers'
 import CreditCustomerDetail from './pages/CreditCustomerDetail'
 import Tanks from './pages/Tanks'
-
+import FuelProducts from './pages/FuelProducts'
+import Users from './pages/Users'
+import AuditLog from './pages/AuditLog'
 
 const queryClient = new QueryClient()
 
@@ -28,6 +30,11 @@ export default function App() {
                   <Route path="/credit/:id" element={<CreditCustomerDetail />} />
                   <Route path="/tanks" element={<Tanks />} />
                 </Route>
+              <Route path="/fuel-products" element={<FuelProducts />} />
+              <Route element={<ProtectedRoute roles={['SUPER_ADMIN']} />}>
+                <Route path="/users" element={<Users />} />
+                <Route path="/audit-logs" element={<AuditLog />} />
+              </Route>
               </Route>
             </Routes>
           </Router>
