@@ -18,7 +18,7 @@ export default function Dashboard() {
       {dashError && <ErrorState message={dashError} onRetry={refreshDash} />}
       {dash && (
         <>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 sm:grid-cols-4">
             <div className="rounded-xl border border-line bg-surface p-4">
               <div className="text-xs text-muted">Shifts logged</div>
               <div className="mt-1 text-xl font-semibold tabular-nums">{dash.total_shifts_logged}</div>
