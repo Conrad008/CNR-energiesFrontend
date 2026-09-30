@@ -6,7 +6,6 @@ import Input from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import { formatKsh } from '@/lib/format'
 import { reconcileShift } from '@/api/reconciliation'
-import { useState } from 'react'
 import StkPushModal from '@/features/mpesa/StkPushModal'
 
 export default function ReconcileForm({ shift }) {
