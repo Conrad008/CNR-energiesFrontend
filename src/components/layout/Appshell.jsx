@@ -4,8 +4,8 @@ import {
     Menu, X, Sun, Moon, LogOut,
     LayoutDashboard, Fuel, Users as UsersIcon, Droplet, FileText, ShieldCheck
 } from 'lucide-react'
-import { useAuth } from '@/auth/AuthContext'
-import { useTheme } from '@/theme/ThemeContext'
+import { useAuth } from '@/context/AuthContext'
+import { useTheme } from '@/context/ThemeContext'
 import { ROLE } from '@/lib/roles'
 
 const ALL_NAV = [
