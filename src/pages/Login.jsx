@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { Fuel, Loader2 } from 'lucide-react'
-import { useAuth } from '@/auth/AuthContext'
+import { useAuth } from '@/context/AuthContext'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
