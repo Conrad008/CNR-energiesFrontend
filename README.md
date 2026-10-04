@@ -93,6 +93,7 @@ npm run preview   # serve the production build locally to sanity-check before de
 ---
 
 ## Project Structure
+```
 
 src/
 ├── api/ One file per API resource (auth, shifts, tanks, credit, mpesa, etc.)
@@ -108,6 +109,7 @@ src/
 ├── App.jsx
 └── main.jsx
 
+```
 
 ---
 
