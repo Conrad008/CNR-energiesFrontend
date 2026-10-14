@@ -33,7 +33,7 @@ export default function App() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/audit-logs" element={<AuditLog />} />
               </Route>
-              <Route element={<ProtectedRoute roles={['SUPER_ADMIN', 'INVENTORY_OFFICER']} />}>
+              <Route element={<ProtectedRoute roles={['SUPER_ADMIN', 'INVENTORY_OFFICER', 'MANAGER']} />}>
                 <Route path="/tanks" element={<Tanks />} />
               </Route>
             </Route>
