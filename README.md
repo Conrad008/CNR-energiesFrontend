@@ -1,9 +1,8 @@
-# CNR Energies — Frontend
+# CNR Energies 
 
-React + Vite frontend for the CNR Energies fuel station operations platform. Consumes the CNR Energies Django REST API to provide role-based tools for shift management, fuel reconciliation, tank inventory, B2B credit accounts, and M-Pesa payments.
+A full-stack, enterprise-grade station management and operations platform custom-built for **CNR Energies**. The system digitizes daily petrol station operations—featuring explicit shift lifecycle management, double-entry financial reconciliation, underground tank inventory auditing, automated B2B credit controls, and real-time management analytics. Consumes the CNR Energies Django REST API to provide role-based tools for shift management, fuel reconciliation, tank inventory, B2B credit accounts, and M-Pesa payments.
 
-**Live app:** https://cnr-energies-frontend.vercel.app
-**Backend API:** https://cnr-energies-backend.onrender.com/api
+**Backend APIs:** https://cnr-energies-backend.onrender.com/api
 
 ---
 
