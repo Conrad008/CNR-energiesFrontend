@@ -28,13 +28,11 @@ export default function App() {
               <Route path="/shifts/:id" element={<ShiftDetailPage />} />
               <Route path="/credit" element={<CreditCustomers />} />
               <Route path="/credit/:id" element={<CreditCustomerDetail />} />
+              <Route path="/tanks" element={<Tanks />} />
               <Route path="/fuel-products" element={<FuelProducts />} />
               <Route element={<ProtectedRoute roles={['SUPER_ADMIN']} />}>
                 <Route path="/users" element={<Users />} />
                 <Route path="/audit-logs" element={<AuditLog />} />
-              </Route>
-              <Route element={<ProtectedRoute roles={['SUPER_ADMIN', 'INVENTORY_OFFICER', 'MANAGER']} />}>
-                <Route path="/tanks" element={<Tanks />} />
               </Route>
             </Route>
           </Route>
