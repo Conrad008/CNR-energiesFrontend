@@ -11,3 +11,14 @@ export const reviewLeave = (id, payload) => api.post(`/leave/${id}/review/`, pay
 export const listUsers = () => api.get('/users/')
 export const updateUser = (id, payload) => api.patch(`/users/${id}/`, payload)
 
+export async function downloadReport(path, filename) {
+  const res = await api.get(path, { responseType: 'blob' })
+  const url = window.URL.createObjectURL(res.data)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  window.URL.revokeObjectURL(url)
+}
