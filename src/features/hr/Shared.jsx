@@ -45,3 +45,9 @@ export function errMsg(err, fallback = 'Something went wrong. Please try again.'
   })
   return parts.join(' · ') || fallback
 }
+
+export function daysBetween(from, to) {
+  if (!from || !to) return 0
+  const d = Math.round((new Date(to) - new Date(from)) / 86400000) + 1
+  return d > 0 ? d : 0
+}
