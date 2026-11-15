@@ -51,3 +51,12 @@ export function daysBetween(from, to) {
   const d = Math.round((new Date(to) - new Date(from)) / 86400000) + 1
   return d > 0 ? d : 0
 }
+
+export const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }) : '—')
+
+export const fmtKes = (n) =>
+  n === null || n === undefined || n === ''
+    ? '—'
+    : Number(n).toLocaleString('en-KE', { style: 'currency', currency: 'KES', maximumFractionDigits: 0 })
+
+export const todayLocal = () => new Date().toLocaleDateString('en-CA')
