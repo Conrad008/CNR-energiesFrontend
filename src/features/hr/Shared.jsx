@@ -22,3 +22,26 @@ const STATUS_STYLE ={
 
 }
 
+export function statusBadge ({status}) {
+  const label = status ? status.charAt(0) + status.slice(1).toLowerCase() : ''
+  return (
+    <span
+      className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_STYLE[status] ?? 'bg-line text-muted'}`}
+    >
+      {label}
+    </span>
+  )
+}
+
+export function errMsg(err, fallback = 'Something went wrong. Please try again.') {
+  const d = err?.response?.data
+  if (!d) return fallback
+  if (typeof d === 'string') return d.length < 200 ? d : fallback
+  if (d.error) return d.error
+  if (d.detail) return d.detail
+  const parts = Object.entries(d).map(([k, v]) => {
+    const text = Array.isArray(v) ? v.join(' ') : String(v)
+    return k === 'non_field_errors' ? text : `${k.replace(/_/g, ' ')}: ${text}`
+  })
+  return parts.join(' · ') || fallback
+}
